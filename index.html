@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petabase</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --orange: #D97757;
+            --orange-glow: rgba(217, 119, 87, 0.7);
+            --black: #050505;
+            --panel: #111;
+            --text: #e0e0e0;
+            --muted: #666;
+            --border: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--black);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--panel) 1px, transparent 1px),
+                linear-gradient(90deg, var(--panel) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 2px solid var(--orange);
+            box-shadow: 0 0 15px var(--orange-glow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            color: var(--orange);
+            text-shadow: 0 0 8px var(--orange-glow);
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 25px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--orange);
+            text-shadow: 0 0 8px var(--orange-glow);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 0 20px;
+            min-height: 65vh;
+            text-align: center;
+        }
+
+        .hero-text { margin-bottom: 40px; }
+        
+        .glitch {
+            font-size: 4.5rem;
+            font-weight: bold;
+            position: relative;
+            color: var(--orange);
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--black);
+        }
+        .glitch::before {
+            left: 3px; text-shadow: -2px 0 #D97757;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -3px; text-shadow: -2px 0 #D97757;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 85px, 0); }
+            20% { clip: rect(50px, 9999px, 15px, 0); }
+            40% { clip: rect(75px, 9999px, 60px, 0); }
+            60% { clip: rect(25px, 9999px, 90px, 0); }
+            80% { clip: rect(90px, 9999px, 40px, 0); }
+            100% { clip: rect(15px, 9999px, 70px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            20% { clip: rect(15px, 9999px, 80px, 0); }
+            40% { clip: rect(90px, 9999px, 20px, 0); }
+            60% { clip: rect(40px, 9999px, 70px, 0); }
+            80% { clip: rect(10px, 9999px, 95px, 0); }
+            100% { clip: rect(85px, 9999px, 30px, 0); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: transparent;
+            color: var(--orange);
+            border: 2px solid var(--orange);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--orange-glow), inset 0 0 10px var(--orange-glow);
+        }
+
+        .btn:hover {
+            background: var(--orange);
+            color: var(--black);
+            box-shadow: 0 0 25px var(--orange-glow), inset 0 0 20px var(--orange-glow);
+        }
+
+        .terminal-box {
+            background: rgba(17, 17, 17, 0.85);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--orange);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 600px;
+            text-align: left;
+            color: #D97757;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            background: rgba(5, 5, 5, 0.9);
+        }
+        footer a { color: var(--orange); text-decoration: none; margin: 0 10px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Petabase</a>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="stats.html">Stats</a>
+            <a href="docs.html">Docs</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero-text">
+            <h1 class="glitch" data-text="Petabase">Petabase</h1>
+            <p class="subtitle">Real-time telemetry and usage statistics of the world's most queried database engines.</p>
+        </div>
+
+        <a href="stats.html" class="btn">Access Mainframe</a>
+
+        <div class="terminal-box">
+            <p>> SYSTEM BOOT...</p>
+            <p>> CONNECTING TO PETABASE NETWORK...</p>
+            <p>> ESTABLISHING SECURE CONNECTION...</p>
+            <p>> CONNECTION SUCCESSFUL.</p>
+            <p>> FETCHING LATEST METRICS...</p>
+            <p style="color: var(--orange);">[READY] AWAITING COMMAND.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Petabase Cybernetics. All rights reserved.</p>
+        <div style="margin-top: 10px;">
+            <a href="terms.html">Terms of Service</a> | 
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+
+</body>
+</html>
