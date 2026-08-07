@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petabase Statsistics</title>
+    <!-- Chart.js for rendering the data graph -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --orange: #D97757;
+            --orange-glow: rgba(217, 119, 87, 0.7);
+            --black: #050505;
+            --panel: #111;
+            --text: #e0e0e0;
+            --muted: #666;
+            --border: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--black);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--panel) 1px, transparent 1px),
+                linear-gradient(90deg, var(--panel) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 2px solid var(--orange);
+            box-shadow: 0 0 15px var(--orange-glow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 28px; color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); text-decoration: none; font-weight: bold; letter-spacing: 2px; }
+        nav a { color: var(--text); text-decoration: none; margin-left: 25px; text-transform: uppercase; transition: 0.3s; font-size: 16px; }
+        nav a:hover, nav a.active { color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); }
+
+        main { max-width: 1200px; margin: 40px auto; padding: 0 20px; min-height: 70vh; }
+
+        .panel {
+            background: rgba(17, 17, 17, 0.85);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--orange);
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        h2 { color: var(--orange); text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 0 5px var(--orange-glow); letter-spacing: 2px; }
+
+        .chart-container { position: relative; height: 400px; width: 100%; margin-bottom: 30px; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--orange); font-size: 1.1rem; text-transform: uppercase; }
+        tr:hover { background: rgba(217, 119, 87, 0.15); }
+        
+        .trend-up { color: #4ade80; }
+        .trend-down { color: #f87171; }
+        
+        .rank-badge {
+            background: var(--orange);
+            color: var(--black);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        footer { text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--muted); background: rgba(5, 5, 5, 0.9); }
+        footer a { color: var(--orange); text-decoration: none; margin: 0 10px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Petabase</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="stats.html" class="active">Stats</a>
+            <a href="docs.html">Docs</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="panel">
+            <h2>> Database Popularity Telemetry</h2>
+            <div class="chart-container">
+                <canvas id="dbChart"></canvas>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>> Mainframe Registry Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Database Engine</th>
+                        <th>Database Model</th>
+                        <th>Usage Score</th>
+                        <th>Trend (30d)</th>
+                    </tr>
+                </thead>
+                <tbody id="dbTableBody">
+                    <!-- Data will be populated via JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Petabase Cybernetics. All rights reserved.</p>
+        <div style="margin-top: 10px;">
+            <a href="terms.html">Terms of Service</a> | 
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script>
+        // Real-world database popularity data approx. based on DB-Engines standard
+        const dbData = [
+            { rank: 1, name: "Oracle", type: "Relational", score: 1240.23, trend: "+12.5" },
+            { rank: 2, name: "MySQL", type: "Relational", score: 1070.15, trend: "-5.2" },
+            { rank: 3, name: "Microsoft SQL Server", type: "Relational", score: 850.40, trend: "-10.1" },
+            { rank: 4, name: "PostgreSQL", type: "Relational", score: 640.80, trend: "+25.4" },
+            { rank: 5, name: "MongoDB", type: "Document", score: 410.50, trend: "+8.9" },
+            { rank: 6, name: "Redis", type: "Key-value", score: 160.20, trend: "+3.1" },
+            { rank: 7, name: "Elasticsearch", type: "Search engine", score: 135.10, trend: "-1.5" },
+            { rank: 8, name: "IBM Db2", type: "Relational", score: 130.00, trend: "-4.0" },
+            { rank: 9, name: "Snowflake", type: "Relational", score: 125.50, trend: "+30.2" },
+            { rank: 10, name: "SQLite", type: "Relational", score: 120.10, trend: "+1.2" },
+            { rank: 11, name: "Cassandra", type: "Wide column", score: 115.05, trend: "-0.5" },
+            { rank: 12, name: "MariaDB", type: "Relational", score: 105.80, trend: "+2.1" },
+            { rank: 13, name: "Splunk", type: "Search engine", score: 95.40, trend: "+0.8" },
+            { rank: 14, name: "Microsoft Access", type: "Relational", score: 85.20, trend: "-5.6" },
+            { rank: 15, name: "Amazon DynamoDB", type: "Document", score: 82.10, trend: "+15.3" }
+        ];
+
+        // Populate Table
+        const tbody = document.getElementById('dbTableBody');
+        dbData.forEach(db => {
+            const tr = document.createElement('tr');
+            const trendClass = db.trend.startsWith('+') ? 'trend-up' : 'trend-down';
+            tr.innerHTML = `
+                <td><span class="rank-badge">${db.rank}</span></td>
+                <td style="font-weight:bold; color:#fff;">${db.name}</td>
+                <td>${db.type}</td>
+                <td>${db.score.toFixed(2)}</td>
+                <td class="${trendClass}">${db.trend}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Populate Chart
+        const ctx = document.getElementById('dbChart').getContext('2d');
+        const labels = dbData.slice(0, 10).map(db => db.name);
+        const scores = dbData.slice(0, 10).map(db => db.score);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Popularity Score',
+                    data: scores,
+                    backgroundColor: 'rgba(217, 119, 87, 0.8)',
+                    borderColor: '#D97757',
+                    borderWidth: 2,
+                    hoverBackgroundColor: '#D97757'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#333' },
+                        ticks: { color: '#e0e0e0', font: { family: "'Share Tech Mono', monospace" } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { 
+                            color: '#e0e0e0', 
+                            font: { family: "'Share Tech Mono', monospace" },
+                            maxRotation: 0,
+                            minRotation: 0
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#D97757', font: { family: "'Share Tech Mono', monospace", size: 14 } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
