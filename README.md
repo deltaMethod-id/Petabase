@@ -39,3 +39,4 @@ Github-Petabase-Repository/
 |_ README.md      # Project documentation
 |_ LICENSE        # ISC License
 |_ vercel.json    # Vercel deployment configuration
+|_ pb.png # favicon
