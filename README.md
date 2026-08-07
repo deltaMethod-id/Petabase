@@ -3,7 +3,7 @@
 > A lightweight, cyberpunk-themed telemetry dashboard for tracking, visualizing, and analyzing real-world database usage statistics.
 
 ![Theme](https://img.shields.io/badge/Theme-Cyberpunk-D97757?style=flat-square)
-![Color](https://img.shields.io/badge/Palette-Claude%20Orange%20%26%20Black-050505?style=flat-square)
+![Color](https://img.shields.io/badge/Palette-Orange%20Orange%20%26%20Black-050505?style=flat-square)
 ![Stack](https://img.shields.io/badge/Stack-HTML5%20%7C%20CSS3%20%7C%20JS-informational?style=flat-square)
 ![License](https://img.shields.io/badge/License-ISC-orange?style=flat-square)
 
