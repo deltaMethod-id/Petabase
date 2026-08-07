@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petabase Documentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --orange: #D97757;
+            --orange-glow: rgba(217, 119, 87, 0.7);
+            --black: #050505;
+            --panel: #111;
+            --text: #e0e0e0;
+            --muted: #666;
+            --border: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--black);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--panel) 1px, transparent 1px),
+                linear-gradient(90deg, var(--panel) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 2px solid var(--orange);
+            box-shadow: 0 0 15px var(--orange-glow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 28px; color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); text-decoration: none; font-weight: bold; letter-spacing: 2px; }
+        nav a { color: var(--text); text-decoration: none; margin-left: 25px; text-transform: uppercase; transition: 0.3s; font-size: 16px; }
+        nav a:hover, nav a.active { color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); }
+
+        main { max-width: 900px; margin: 40px auto; padding: 0 20px; min-height: 70vh; }
+
+        .panel {
+            background: rgba(17, 17, 17, 0.85);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--orange);
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        h2 { color: var(--orange); text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 0 5px var(--orange-glow); }
+        h3 { color: #fff; margin-top: 20px; margin-bottom: 10px; }
+        p { margin-bottom: 15px; }
+        ul { margin-left: 20px; margin-bottom: 15px; list-style-type: square; }
+        li { margin-bottom: 8px; }
+
+        code, pre {
+            font-family: 'Share Tech Mono', monospace;
+            background: #000;
+            color: #D97757;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+        }
+        code { padding: 3px 6px; }
+        pre { padding: 15px; overflow-x: auto; margin: 10px 0 20px 0; border-left: 3px solid #D97757; }
+
+        footer { text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--muted); background: rgba(5, 5, 5, 0.9); }
+        footer a { color: var(--orange); text-decoration: none; margin: 0 10px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Petabase</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="stats.html">Stats</a>
+            <a href="docs.html" class="active">Docs</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="panel">
+            <h2>> System Overview</h2>
+            <p>Welcome to the Petabase Documentation terminal. <strong>Petabase</strong> is a centralized data matrix designed to track, analyze, and visualize the usage statistics of the world's most prominent database engines.</p>
+            <p>Whether you are a corporate systems architect or an underground netrunner, understanding which data vaults are currently dominating the grid is crucial for optimal infrastructure deployment.</p>
+        </div>
+
+        <div class="panel">
+            <h2>> Telemetry & Metrics</h2>
+            <p>Our neural network continuously compiles data to generate accurate popularity scores. The statistics displayed on this grid are formulated using the following real-world indicators:</p>
+            <ul>
+                <li><strong>Search Volume:</strong> Query frequencies across major hypernet search engines.</li>
+                <li><strong>Technical Chatter:</strong> Mentions in developer forums, programming subnets, and Q&A matrixes.</li>
+                <li><strong>Job Market Demand:</strong> Requirements listed in corporate tech bounties and employment postings.</li>
+                <li><strong>Professional Networks:</strong> Skills linked in professional developer profiles.</li>
+            </ul>
+            <p>All data is normalized into a unified <code>Usage Score</code>, allowing for direct comparison across different database models (Relational, Document, Key-Value, Graph, etc.).</p>
+        </div>
+
+        <div class="panel">
+            <h2>> Core Directive</h2>
+            <p>The digital frontier is built on data. Choosing the right storage engine dictates the speed, security, and scalability of any application construct. Petabase exists to cut through the noise and provide raw, unfiltered telemetry to help developers make informed architectural decisions.</p>
+            <pre><code>STATUS: [ONLINE]
+DIRECTIVE: MONITOR. ANALYZE. REPORT.</code></pre>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Petabase Cybernetics. All rights reserved.</p>
+        <div style="margin-top: 10px;">
+            <a href="terms.html">Terms of Service</a> | 
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+
+</body>
+</html>
