@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petabase Terms of Service</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --orange: #D97757;
+            --orange-glow: rgba(217, 119, 87, 0.7);
+            --black: #050505;
+            --panel: #111;
+            --text: #e0e0e0;
+            --muted: #666;
+            --border: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--black);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--panel) 1px, transparent 1px),
+                linear-gradient(90deg, var(--panel) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 2px solid var(--orange);
+            box-shadow: 0 0 15px var(--orange-glow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 28px; color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); text-decoration: none; font-weight: bold; letter-spacing: 2px; }
+        nav a { color: var(--text); text-decoration: none; margin-left: 25px; text-transform: uppercase; transition: 0.3s; font-size: 16px; }
+        nav a:hover { color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); }
+
+        main { max-width: 900px; margin: 40px auto; padding: 0 20px; min-height: 70vh; }
+
+        .panel {
+            background: rgba(17, 17, 17, 0.85);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--orange);
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        h2 { color: var(--orange); text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 0 5px var(--orange-glow); }
+        h3 { color: #fff; margin-top: 20px; margin-bottom: 10px; }
+        p { margin-bottom: 15px; }
+
+        footer { text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--muted); background: rgba(5, 5, 5, 0.9); }
+        footer a { color: var(--orange); text-decoration: none; margin: 0 10px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Petabase</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="stats.html">Stats</a>
+            <a href="docs.html">Docs</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="panel">
+            <h2>> Terms of Service</h2>
+            <p><strong>Last Updated: System Year 2026</strong></p>
+            
+            <h3>1. Protocol Agreement</h3>
+            <p>By accessing the Petabase neural grid, you agree to comply with all corporate mainframe regulations. Unauthorized data scraping via subroutines will result in immediate IP termination.</p>
+            
+            <h3>2. Data Accuracy</h3>
+            <p>The statistical arrays provided are aggregated from real-world telemetry across the global tech sector. However, Petabase Cybernetics makes no guarantees of 100% accuracy in volatile environments.</p>
+
+            <h3>3. Usage Rights</h3>
+            <p>The API and visual interfaces are provided "as is". Commercial distribution of unmodified grid data requires a Level-4 Corporate License.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Petabase Cybernetics. All rights reserved.</p>
+        <div style="margin-top: 10px;">
+            <a href="terms.html">Terms of Service</a> | 
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+
+</body>
+</html>
