@@ -1,124 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/pb.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Petabase Privacy Policy</title>
+    <link rel="icon" type="image/png" href="pb.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+      :root {
+        --bg: #080808;
+        --text: #f5f5f5;
+        --muted: #b8b8b8;
+        --line: #262626;
+        --accent: #d97757;
+      }
 
-        :root {
-            --orange: #D97757;
-            --orange-glow: rgba(217, 119, 87, 0.7);
-            --black: #050505;
-            --panel: #111;
-            --text: #e0e0e0;
-            --muted: #666;
-            --border: #333;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      }
 
-        body {
-            font-family: 'Share Tech Mono', monospace;
-            background-color: var(--black);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(var(--panel) 1px, transparent 1px),
-                linear-gradient(90deg, var(--panel) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 9999;
-            pointer-events: none;
-        }
+      .container {
+        width: min(960px, calc(100% - 3rem));
+        margin: 0 auto;
+      }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(5, 5, 5, 0.9);
-            border-bottom: 2px solid var(--orange);
-            box-shadow: 0 0 15px var(--orange-glow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      .topbar {
+        border-bottom: 1px solid var(--line);
+      }
 
-        .logo { font-size: 28px; color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); text-decoration: none; font-weight: bold; letter-spacing: 2px; }
-        nav a { color: var(--text); text-decoration: none; margin-left: 25px; text-transform: uppercase; transition: 0.3s; font-size: 16px; }
-        nav a:hover { color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); }
+      .topbar .container {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-        main { max-width: 900px; margin: 40px auto; padding: 0 20px; min-height: 70vh; }
+      .brand {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
 
-        .panel {
-            background: rgba(17, 17, 17, 0.85);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--orange);
-            padding: 30px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-        }
+      .brand span {
+        color: var(--accent);
+      }
 
-        h2 { color: var(--orange); text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 0 5px var(--orange-glow); }
-        h3 { color: #fff; margin-top: 20px; margin-bottom: 10px; }
-        p { margin-bottom: 15px; }
-        ul { margin-left: 20px; margin-bottom: 15px; }
+      nav {
+        display: flex;
+        gap: 1.3rem;
+      }
 
-        footer { text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--muted); background: rgba(5, 5, 5, 0.9); }
-        footer a { color: var(--orange); text-decoration: none; margin: 0 10px; }
-        footer a:hover { text-decoration: underline; }
+      nav a {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      nav a.active,
+      nav a:hover {
+        color: var(--text);
+      }
+
+      main {
+        padding: 3.5rem 0 4rem;
+      }
+
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        letter-spacing: -0.02em;
+      }
+
+      h2 {
+        margin: 2.1rem 0 0.8rem;
+        font-size: 1.1rem;
+      }
+
+      p {
+        color: var(--muted);
+        line-height: 1.72;
+        margin: 0.6rem 0;
+      }
+
+      .updated {
+        color: #9a9a9a;
+        font-size: 0.9rem;
+      }
     </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo">Petabase</a>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <a class="brand" href="index.html"><span>Peta</span>base</a>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="stats.html">Stats</a>
-            <a href="docs.html">Docs</a>
+          <a href="index.html">Home</a>
+          <a href="stats.html">Stats</a>
+          <a href="docs.html">Docs</a>
+          <a href="terms.html">Terms</a>
+          <a class="active" href="privacy.html">Privacy</a>
         </nav>
+      </div>
     </header>
 
     <main>
-        <div class="panel">
-            <h2>> Privacy Directives</h2>
-            <p><strong>Last Transmitted: System Year 2026</strong></p>
-            
-            <h3>1. Telemetry Collection</h3>
-            <p>Petabase Cybernetics logs minimal metadata from user connections to maintain grid stability. This includes:</p>
-            <ul>
-                <li>IP Node Identifiers</li>
-                <li>Browser/Client Cyberware Types</li>
-                <li>Timestamp of Neural Uplinks</li>
-            </ul>
-            
-            <h3>2. Data Encryption</h3>
-            <p>All data is encrypted utilizing quantum-grade hashing. Your personal identifiers are scrubbed before reaching the main analytical servers.</p>
+      <div class="container">
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: August 2026</p>
 
-            <h3>3. Third-Party Grids</h3>
-            <p>We do not sell telemetry to mega-corporations. Any data shared with federated nodes is strictly for network optimization.</p>
-        </div>
+        <h2>1. Overview</h2>
+        <p>
+          Petabase respects your privacy. This policy explains what information may be collected when you use this website and
+          how we handle it.
+        </p>
+
+        <h2>2. Information We Collect</h2>
+        <p>
+          We may collect basic technical data such as browser type, operating system, referring pages, and approximate visit
+          time for performance and security monitoring.
+        </p>
+
+        <h2>3. How We Use Information</h2>
+        <p>
+          Any collected information is used to maintain website stability, measure usage trends, and improve content quality.
+          We do not sell personal information.
+        </p>
+
+        <h2>4. Cookies</h2>
+        <p>
+          Petabase may use essential cookies for website functionality and analytics cookies for aggregated traffic analysis.
+          You can control cookies through your browser settings.
+        </p>
+
+        <h2>5. Third-Party Links</h2>
+        <p>
+          Petabase links to external sources for transparency. We are not responsible for privacy practices on third-party
+          websites.
+        </p>
+
+        <h2>6. Data Retention</h2>
+        <p>
+          Technical logs are retained only as long as needed for operational purposes, security review, and legal compliance.
+        </p>
+
+        <h2>7. Security</h2>
+        <p>
+          We apply reasonable technical and organizational safeguards to protect collected data. No online system can be
+          guaranteed fully secure.
+        </p>
+
+        <h2>8. Policy Changes</h2>
+        <p>
+          This policy may be updated over time. Any revisions will be published on this page with a new effective date.
+        </p>
+
+        <h2>9. Contact</h2>
+        <p>For privacy requests, contact: privacy@petabase.vercel.app</p>
+      </div>
     </main>
-
-    <footer>
-        <p>&copy; 2026 Petabase. Licensed under the ISC License.</p>
-        <div style="margin-top: 10px;">
-            <a href="terms.html">Terms of Service</a> | 
-            <a href="privacy.html">Privacy Policy</a>
-        </div>
-    </footer>
-
-</body>
+  </body>
 </html>
