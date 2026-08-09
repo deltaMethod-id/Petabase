@@ -1,226 +1,273 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/pb.png">
-    <title>Petabase</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Petabase | Database Popularity Intelligence</title>
+    <link rel="icon" type="image/png" href="pb.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+      :root {
+        --bg: #080808;
+        --panel: #101010;
+        --text: #f6f6f6;
+        --muted: #b5b5b5;
+        --line: #242424;
+        --accent: #d97757;
+        --accent-soft: rgba(217, 119, 87, 0.18);
+      }
 
-        :root {
-            --orange: #D97757;
-            --orange-glow: rgba(217, 119, 87, 0.7);
-            --black: #050505;
-            --panel: #111;
-            --text: #e0e0e0;
-            --muted: #666;
-            --border: #333;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      html,
+      body {
+        margin: 0;
+        font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
 
-        body {
-            font-family: 'Share Tech Mono', monospace;
-            background-color: var(--black);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(var(--panel) 1px, transparent 1px),
-                linear-gradient(90deg, var(--panel) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 9999;
-            pointer-events: none;
-        }
+      .container {
+        width: min(1120px, calc(100% - 3rem));
+        margin: 0 auto;
+      }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(5, 5, 5, 0.9);
-            border-bottom: 2px solid var(--orange);
-            box-shadow: 0 0 15px var(--orange-glow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(8, 8, 8, 0.76);
+        border-bottom: 1px solid var(--line);
+      }
 
-        .logo {
-            font-size: 28px;
-            color: var(--orange);
-            text-shadow: 0 0 8px var(--orange-glow);
-            text-decoration: none;
-            font-weight: bold;
-            letter-spacing: 2px;
+      .topbar .container {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        font-size: 1.2rem;
+      }
+
+      .brand span {
+        color: var(--accent);
+      }
+
+      nav {
+        display: flex;
+        gap: 1.4rem;
+      }
+
+      nav a {
+        color: var(--muted);
+        font-size: 0.95rem;
+        transition: color 160ms ease;
+      }
+
+      nav a:hover,
+      nav a.active {
+        color: var(--text);
+      }
+
+      .hero {
+        min-height: calc(100vh - 72px);
+        display: grid;
+        align-items: center;
+        background:
+          radial-gradient(circle at 78% 22%, var(--accent-soft), transparent 38%),
+          linear-gradient(180deg, #0b0b0b 0%, #070707 100%);
+      }
+
+      .hero-wrap {
+        padding: 5rem 0 4rem;
+      }
+
+      .eyebrow {
+        color: var(--accent);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        margin-bottom: 0.9rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 6vw, 5.4rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        max-width: 10ch;
+      }
+
+      .lead {
+        margin: 1.3rem 0 0;
+        max-width: 58ch;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.6;
+      }
+
+      .cta-row {
+        margin-top: 2.2rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.78rem 1.2rem;
+        border: 1px solid var(--line);
+        font-size: 0.95rem;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .btn.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #0d0d0d;
+        font-weight: 600;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn.secondary:hover {
+        border-color: #3a3a3a;
+      }
+
+      .section {
+        border-top: 1px solid var(--line);
+        padding: 5.2rem 0;
+      }
+
+      .section h2 {
+        margin: 0;
+        font-size: clamp(1.4rem, 3vw, 2.2rem);
+        letter-spacing: -0.02em;
+      }
+
+      .section p {
+        color: var(--muted);
+        max-width: 70ch;
+        line-height: 1.65;
+        margin: 0.95rem 0 0;
+      }
+
+      .footer {
+        border-top: 1px solid var(--line);
+        color: #8e8e8e;
+        font-size: 0.86rem;
+        padding: 1.4rem 0;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 800px) {
+        nav {
+          gap: 0.9rem;
+          flex-wrap: wrap;
+          justify-content: flex-end;
         }
 
         nav a {
-            color: var(--text);
-            text-decoration: none;
-            margin-left: 25px;
-            text-transform: uppercase;
-            transition: 0.3s;
-            font-size: 16px;
+          font-size: 0.88rem;
         }
-
-        nav a:hover, nav a.active {
-            color: var(--orange);
-            text-shadow: 0 0 8px var(--orange-glow);
-        }
-
-        main {
-            max-width: 1000px;
-            margin: 80px auto;
-            padding: 0 20px;
-            min-height: 65vh;
-            text-align: center;
-        }
-
-        .hero-text { margin-bottom: 40px; }
-        
-        .glitch {
-            font-size: 4.5rem;
-            font-weight: bold;
-            position: relative;
-            color: var(--orange);
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
-        }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--black);
-        }
-        .glitch::before {
-            left: 3px; text-shadow: -2px 0 #D97757;
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-        .glitch::after {
-            left: -3px; text-shadow: -2px 0 #D97757;
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 85px, 0); }
-            20% { clip: rect(50px, 9999px, 15px, 0); }
-            40% { clip: rect(75px, 9999px, 60px, 0); }
-            60% { clip: rect(25px, 9999px, 90px, 0); }
-            80% { clip: rect(90px, 9999px, 40px, 0); }
-            100% { clip: rect(15px, 9999px, 70px, 0); }
-        }
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(65px, 9999px, 100px, 0); }
-            20% { clip: rect(15px, 9999px, 80px, 0); }
-            40% { clip: rect(90px, 9999px, 20px, 0); }
-            60% { clip: rect(40px, 9999px, 70px, 0); }
-            80% { clip: rect(10px, 9999px, 95px, 0); }
-            100% { clip: rect(85px, 9999px, 30px, 0); }
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text);
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background: transparent;
-            color: var(--orange);
-            border: 2px solid var(--orange);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--orange-glow), inset 0 0 10px var(--orange-glow);
-        }
-
-        .btn:hover {
-            background: var(--orange);
-            color: var(--black);
-            box-shadow: 0 0 25px var(--orange-glow), inset 0 0 20px var(--orange-glow);
-        }
-
-        .terminal-box {
-            background: rgba(17, 17, 17, 0.85);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--orange);
-            padding: 20px;
-            margin: 50px auto;
-            max-width: 600px;
-            text-align: left;
-            color: #D97757;
-            font-size: 0.9rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid var(--border);
-            color: var(--muted);
-            background: rgba(5, 5, 5, 0.9);
-        }
-        footer a { color: var(--orange); text-decoration: none; margin: 0 10px; }
-        footer a:hover { text-decoration: underline; }
+      }
     </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo">Petabase</a>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <a class="brand" href="index.html"><span>Peta</span>base</a>
         <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="stats.html">Stats</a>
-            <a href="docs.html">Docs</a>
+          <a class="active" href="index.html">Home</a>
+          <a href="stats.html">Stats</a>
+          <a href="docs.html">Docs</a>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
         </nav>
+      </div>
     </header>
 
     <main>
-        <div class="hero-text">
-            <h1 class="glitch" data-text="Petabase">Petabase</h1>
-            <p class="subtitle">Real-time telemetry and usage statistics of the world's most queried database engines.</p>
+      <section class="hero">
+        <div class="container hero-wrap reveal">
+          <p class="eyebrow">Petabase Data Monitor</p>
+          <h1>Petabase</h1>
+          <p class="lead">
+            Clear, source-based visibility into the most-used database systems across the market. Track ranking movement,
+            compare database models, and share trusted metrics with your team.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="stats.html">Explore Live Rankings</a>
+            <a class="btn secondary" href="docs.html">Read Methodology</a>
+          </div>
         </div>
+      </section>
 
-        <a href="stats.html" class="btn">Access Mainframe</a>
-
-        <div class="terminal-box">
-            <p>> SYSTEM BOOT...</p>
-            <p>> CONNECTING TO PETABASE NETWORK...</p>
-            <p>> ESTABLISHING SECURE CONNECTION...</p>
-            <p>> CONNECTION SUCCESSFUL.</p>
-            <p>> FETCHING LATEST METRICS...</p>
-            <p style="color: var(--orange);">[READY] AWAITING COMMAND.</p>
+      <section class="section reveal">
+        <div class="container">
+          <h2>One Purpose: Reliable Database Popularity Insight</h2>
+          <p>
+            Petabase is focused on one thing only: helping teams understand which database platforms are seeing the highest
+            adoption and sustained popularity. The ranking data on this site is sourced from public DB-Engines snapshots and
+            documented with timestamps.
+          </p>
         </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="container">
+          <h2>Built For Product, Platform, and Data Teams</h2>
+          <p>
+            Use Petabase to validate platform strategy, benchmark technology choices, and communicate trends internally.
+            Whether you manage transactional workloads or analytics ecosystems, these rankings provide a practical market
+            signal.
+          </p>
+        </div>
+      </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Petabase. Licensed under the ISC License</p>
-        <div style="margin-top: 10px;">
-            <a href="terms.html">Terms of Service</a> | 
-            <a href="privacy.html">Privacy Policy</a>
-        </div>
+    <footer class="footer">
+      <div class="container">Petabase © 2026. Professional database popularity reporting.</div>
     </footer>
 
-</body>
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.16 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
