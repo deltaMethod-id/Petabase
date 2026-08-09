@@ -1,141 +1,188 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/pb.png">
-    <title>Petabase Documentation</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Petabase Docs | Data Methodology</title>
+    <link rel="icon" type="image/png" href="pb.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+      :root {
+        --bg: #080808;
+        --text: #f6f6f6;
+        --muted: #b6b6b6;
+        --line: #262626;
+        --accent: #d97757;
+      }
 
-        :root {
-            --orange: #D97757;
-            --orange-glow: rgba(217, 119, 87, 0.7);
-            --black: #050505;
-            --panel: #111;
-            --text: #e0e0e0;
-            --muted: #666;
-            --border: #333;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      }
 
-        body {
-            font-family: 'Share Tech Mono', monospace;
-            background-color: var(--black);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(var(--panel) 1px, transparent 1px),
-                linear-gradient(90deg, var(--panel) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 9999;
-            pointer-events: none;
-        }
+      .container {
+        width: min(1000px, calc(100% - 3rem));
+        margin: 0 auto;
+      }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(5, 5, 5, 0.9);
-            border-bottom: 2px solid var(--orange);
-            box-shadow: 0 0 15px var(--orange-glow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: rgba(8, 8, 8, 0.85);
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+      }
 
-        .logo { font-size: 28px; color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); text-decoration: none; font-weight: bold; letter-spacing: 2px; }
-        nav a { color: var(--text); text-decoration: none; margin-left: 25px; text-transform: uppercase; transition: 0.3s; font-size: 16px; }
-        nav a:hover, nav a.active { color: var(--orange); text-shadow: 0 0 8px var(--orange-glow); }
+      .topbar .container {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-        main { max-width: 900px; margin: 40px auto; padding: 0 20px; min-height: 70vh; }
+      .brand {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
 
-        .panel {
-            background: rgba(17, 17, 17, 0.85);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--orange);
-            padding: 30px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-        }
+      .brand span {
+        color: var(--accent);
+      }
 
-        h2 { color: var(--orange); text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 0 5px var(--orange-glow); }
-        h3 { color: #fff; margin-top: 20px; margin-bottom: 10px; }
-        p { margin-bottom: 15px; }
-        ul { margin-left: 20px; margin-bottom: 15px; list-style-type: square; }
-        li { margin-bottom: 8px; }
+      nav {
+        display: flex;
+        gap: 1.3rem;
+      }
 
-        code, pre {
-            font-family: 'Share Tech Mono', monospace;
-            background: #000;
-            color: #D97757;
-            border: 1px solid var(--border);
-            border-radius: 3px;
-        }
-        code { padding: 3px 6px; }
-        pre { padding: 15px; overflow-x: auto; margin: 10px 0 20px 0; border-left: 3px solid #D97757; }
+      nav a {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
 
-        footer { text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--muted); background: rgba(5, 5, 5, 0.9); }
-        footer a { color: var(--orange); text-decoration: none; margin: 0 10px; }
-        footer a:hover { text-decoration: underline; }
+      nav a.active,
+      nav a:hover {
+        color: var(--text);
+      }
+
+      main {
+        padding: 3.8rem 0 4.2rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3rem);
+        letter-spacing: -0.02em;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 1.24rem;
+        letter-spacing: -0.01em;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      .lead {
+        margin: 1rem 0 0;
+        max-width: 72ch;
+      }
+
+      .block {
+        border-top: 1px solid var(--line);
+        padding-top: 2rem;
+        margin-top: 2.2rem;
+      }
+
+      ul {
+        margin: 0.8rem 0 0;
+        padding-left: 1.1rem;
+      }
+
+      .ref {
+        color: #999;
+        font-size: 0.88rem;
+      }
     </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo">Petabase</a>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <a class="brand" href="index.html"><span>Peta</span>base</a>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="stats.html">Stats</a>
-            <a href="docs.html" class="active">Docs</a>
+          <a href="index.html">Home</a>
+          <a href="stats.html">Stats</a>
+          <a class="active" href="docs.html">Docs</a>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
         </nav>
+      </div>
     </header>
 
     <main>
-        <div class="panel">
-            <h2>> System Overview</h2>
-            <p>Welcome to the Petabase Documentation terminal. <strong>Petabase</strong> is a centralized data matrix designed to track, analyze, and visualize the usage statistics of the world's most prominent database engines.</p>
-            <p>Whether you are a corporate systems architect or an underground netrunner, understanding which data vaults are currently dominating the grid is crucial for optimal infrastructure deployment.</p>
-        </div>
+      <div class="container">
+        <h1>Documentation and Methodology</h1>
+        <p class="lead">
+          Petabase publishes database popularity rankings using public source data. This page explains where the numbers come
+          from, how they are interpreted, and how often you should refresh them.
+        </p>
 
-        <div class="panel">
-            <h2>> Telemetry & Metrics</h2>
-            <p>Our neural network continuously compiles data to generate accurate popularity scores. The statistics displayed on this grid are formulated using the following real-world indicators:</p>
-            <ul>
-                <li><strong>Search Volume:</strong> Query frequencies across major hypernet search engines.</li>
-                <li><strong>Technical Chatter:</strong> Mentions in developer forums, programming subnets, and Q&A matrixes.</li>
-                <li><strong>Job Market Demand:</strong> Requirements listed in corporate tech bounties and employment postings.</li>
-                <li><strong>Professional Networks:</strong> Skills linked in professional developer profiles.</li>
-            </ul>
-            <p>All data is normalized into a unified <code>Usage Score</code>, allowing for direct comparison across different database models (Relational, Document, Key-Value, Graph, etc.).</p>
-        </div>
+        <section class="block">
+          <h2>Primary Data Source</h2>
+          <p>
+            The ranking table in <a href="stats.html">stats.html</a> is based on DB-Engines popularity scores (July 2026
+            snapshot) and database model labels as reflected in public ranking mirrors and DB-Engines category documentation.
+          </p>
+          <p class="ref">
+            Reference links:
+            <a href="https://db-engines.com/en/ranking" target="_blank" rel="noopener">db-engines.com/en/ranking</a>,
+            <a href="https://hellogithub.com/en/report/db-engines" target="_blank" rel="noopener">HelloGitHub DB ranking mirror</a>.
+          </p>
+        </section>
 
-        <div class="panel">
-            <h2>> Core Directive</h2>
-            <p>The digital frontier is built on data. Choosing the right storage engine dictates the speed, security, and scalability of any application construct. Petabase exists to cut through the noise and provide raw, unfiltered telemetry to help developers make informed architectural decisions.</p>
-            <pre><code>STATUS: [ONLINE]
-DIRECTIVE: MONITOR. ANALYZE. REPORT.</code></pre>
-        </div>
+        <section class="block">
+          <h2>What The Score Represents</h2>
+          <p>
+            DB-Engines popularity scores are composite indicators. They are not direct active-user counts. The score combines
+            multiple external signals to represent overall market visibility and momentum.
+          </p>
+          <ul>
+            <li>General web search interest</li>
+            <li>Technical discussion activity</li>
+            <li>Job-market and professional demand indicators</li>
+            <li>Social and community presence signals</li>
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2>Update Cadence</h2>
+          <p>
+            Rankings are updated monthly by DB-Engines. Petabase should be refreshed monthly to keep the ordering and scores
+            accurate. For procurement, architecture standards, or migration planning, always validate against the latest month.
+          </p>
+        </section>
+
+        <section class="block">
+          <h2>Scope Notice</h2>
+          <p>
+            Petabase tracks popularity and ecosystem traction. It does not replace benchmarking, security review, pricing
+            analysis, or workload-specific testing.
+          </p>
+        </section>
+      </div>
     </main>
-
-    <footer>
-        <p>&copy; 2026 Petabase. Licensed under the ISC License.</p>
-        <div style="margin-top: 10px;">
-            <a href="terms.html">Terms of Service</a> | 
-            <a href="privacy.html">Privacy Policy</a>
-        </div>
-    </footer>
-
-</body>
+  </body>
 </html>
